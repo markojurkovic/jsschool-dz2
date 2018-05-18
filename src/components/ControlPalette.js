@@ -5,14 +5,7 @@ import PixelRow from "./PixelRow";
 class ControlPalette extends Component {
   rowPixelColors = [];
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      colorSelected: false
-    };
-  }
-
-  generateControlRow() {
+  generateControlRowColors() {
     for (let i = 0; i < 10; i++) {
       let color = this.props.generatingFunction();
       this.rowPixelColors.push({
@@ -22,12 +15,16 @@ class ControlPalette extends Component {
     }
   }
 
-  handleControlClick = () => {
-    this.props.handleClick();
+  handleColorPaletteClick = (
+    rowNumber,
+    indexInRow,
+    selectedPixelColor
+  ) => {
+    this.props.handleClick(selectedPixelColor);
   };
 
   componentWillMount() {
-    this.generateControlRow();
+    this.generateControlRowColors();
   }
 
   render() {
@@ -35,10 +32,8 @@ class ControlPalette extends Component {
       <div className="controlRow">
         <PixelRow
           rowColors={this.rowPixelColors}
-          colorSelected={this.state.colorSelected}
-          controlRow={true}
-          handleClick={this.handleControlClick}
-          handleColorChange={this.handleColorChange}
+          colorSelected={this.props.colorSelected}
+          handleClick={this.handleColorPaletteClick}
           generatingFunction={this.props.generatingFunction}
         />
       </div>

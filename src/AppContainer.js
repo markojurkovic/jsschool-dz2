@@ -2,8 +2,22 @@ import React, { Component } from "react";
 import RGB from "./components/RGB";
 import ControlPalette from "./components/ControlPalette";
 import "./style/style.css";
+import {
+  BrowserRouter,
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from "react-router-dom";
+import Navigation from "./components/Navigation";
 
 class AppContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedColor: false
+    };
+  }
   generateRandomColor = () => {
     return (
       "rgb(" +
@@ -16,15 +30,50 @@ class AppContainer extends Component {
     );
   };
 
+  handleControlClick = color => {
+    this.setState({
+      selectedColor: color
+    });
+  };
+
   render() {
     return (
-      <div className="grid">
-        <RGB generatingFunction={this.generateRandomColor} />
+      <BrowserRouter>
+        <div>
+          <Navigation />
+          <Switch>
+            <Route
+              path="/rgb"
+              render={props => (
+                <div className="grid">
+                  <RGB
+                    generatingFunction={this.generateRandomColor}
+                    selectedColor={this.state.selectedColor}
+                  />
 
-        <ControlPalette
-          generatingFunction={this.generateRandomColor}
-        />
-      </div>
+                  <ControlPalette
+                    generatingFunction={this.generateRandomColor}
+                    handleClick={this.handleControlClick}
+                  />
+                </div>
+              )}
+            />
+
+            <Route
+              path="/bw"
+              render={props => (
+                <div className="grid">
+                  <RGB
+                    grayscaleColors={true}
+                    generatingFunction={this.generateRandomColor}
+                  />
+                </div>
+              )}
+            />
+            <Redirect to="/rgb" />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }

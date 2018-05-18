@@ -1,10 +1,15 @@
+#root {
+  background-color: black;
+  height: 100vh;
+}
+
 .grid {
   padding: 20px;
   margin: 0 auto;
-  width: 80vw;
+  width: 50vw;
   max-width: 60vh;
-  height: 80vw;
-  max-height: 60vh;
+  height: 50vw;
+  max-height: 50vh;
   font-size: 1rem;
 }
 .row {
@@ -36,4 +41,20 @@
 
 .controlRow {
   margin-top: 10vh;
+}
+
+.navigation {
+  text-align: center;
+}
+
+.nav-link {
+  font-size: 3rem;
+  font-family: "Lato", "Roboto", "Source Sans Pro", sans-serif;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: yellow;
 }

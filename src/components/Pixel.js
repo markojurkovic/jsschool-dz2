@@ -2,12 +2,9 @@ import React, { Component } from "react";
 import "../style/style.css";
 
 class Pixel extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleClick = () => {
     this.props.handleClick(
+      this.props.rowNumber,
       this.props.indexInRow,
       this.props.pixelColor
     );
