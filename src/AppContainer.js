@@ -70,7 +70,23 @@ class AppContainer extends Component {
                 </div>
               )}
             />
-            <Redirect to="/rgb" />
+            <Route
+              exact
+              path="/"
+              render={props => (
+                <div className="grid">
+                  <RGB
+                    generatingFunction={this.generateRandomColor}
+                    selectedColor={this.state.selectedColor}
+                  />
+
+                  <ControlPalette
+                    generatingFunction={this.generateRandomColor}
+                    handleClick={this.handleControlClick}
+                  />
+                </div>
+              )}
+            />
           </Switch>
         </div>
       </BrowserRouter>
